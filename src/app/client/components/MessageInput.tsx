@@ -1,7 +1,9 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import { Smile, Paperclip, Image, Send } from "lucide-react";
+import { sendMessage } from "../services/chatService";
+import { CONFIG } from "../constants/config";
 
 export function MessageInput({
   chatId,
@@ -14,15 +16,20 @@ export function MessageInput({
 }) {
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (message.trim()) {
-      if (isNewChat) {
-        onCreateNewChat(message);
-      } else {
-        console.log(`Sending message to chat ${chatId}: ${message}`);
+    try {
+      if (message.trim() && chatId) {
+        if (isNewChat) {
+          onCreateNewChat(message);
+        } else {
+          console.log(`Sending message to chat ${chatId}: ${message}`);
+          await sendMessage(CONFIG.userId, chatId, message);
+        }
+        setMessage(""); // reset value of input after send
       }
-      setMessage("");
+    } catch (err) {
+      console.error(err);
     }
   };
 

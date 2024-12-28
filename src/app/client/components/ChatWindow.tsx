@@ -2,7 +2,7 @@
 
 import { MessageList } from "./MessageList";
 import { MessageInput } from "./MessageInput";
-import { IChat } from "../types/chat";
+import { IChat } from "../../types/chat";
 
 export function ChatWindow({
   selectedChat,

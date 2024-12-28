@@ -1,6 +1,6 @@
 'use client'
 
-import { IChat } from "../types/chat";
+import { IChat } from "../../types/chat";
 
 export function ChatList({
   chats,

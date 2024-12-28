@@ -2,7 +2,7 @@
 
 import { Search, Edit } from "lucide-react";
 import { ChatList } from "./ChatList";
-import { IChat } from "../types/chat";
+import { IChat } from "../../types/chat";
 
 export function Sidebar({
   chats,

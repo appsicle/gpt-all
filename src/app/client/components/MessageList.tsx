@@ -1,6 +1,6 @@
 'use client'
 
-import { IMessage } from "../types/chat";
+import { IMessage } from "../../types/chat";
 
 // const messages: IMessage[] = [
 //   {

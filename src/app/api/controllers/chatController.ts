@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { supabase } from "../db/supabaseClient";
 
@@ -40,7 +40,33 @@ const createOrUpdateChat = async (userId: string, title: string) => {
   return data;
 };
 
-export { getChatsByUserId, createOrUpdateChat, getAllMessagesFromChat };
+const sendMessage = async (
+  userId: string,
+  chatId: string,
+  message: string,
+) => {
+  const { data, error } = await supabase.from("Messages").insert({
+    chatId,
+    message,
+    senderId: userId,
+  });
+
+  console.log(data);
+  console.log(error);
+
+  if (error) {
+    throw new Error(`Error sending message: ${error.message}`);
+  }
+
+  return data;
+};
+
+export {
+  getChatsByUserId,
+  createOrUpdateChat,
+  getAllMessagesFromChat,
+  sendMessage,
+};
 
 // new message to llm
 // /send?chatId&userId&message

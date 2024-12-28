@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { IChat } from "../types/chat";
+import { IChat } from "../../types/chat";
 import { fetchAllChats } from "../services/chatService";
+import { CONFIG } from "../constants/config";
+
+const userId = CONFIG.userId;
 
 export const useChats = () => {
   const [chats, setChats] = useState<IChat[]>([]);
@@ -14,7 +17,7 @@ export const useChats = () => {
   useEffect(() => {
     const getAllChats = async () => {
       try {
-        const fetchedChats = await fetchAllChats();
+        const fetchedChats = await fetchAllChats(userId);
         setChats(fetchedChats);
       } catch (error) {
         console.error(error);
